@@ -1,5 +1,5 @@
 import { useLanguage } from "../context/LanguageContext";
-import galleryData from "../data/galleryData";
+import GalleryData from "../data/GalleryData";
 
 export default function Gallery() {
   const { t } = useLanguage();
@@ -9,7 +9,7 @@ export default function Gallery() {
       <h2 className="text-3xl font-semibold mb-8">{t("gallery.title")}</h2>
 
       <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        {galleryData.map((img, idx) => (
+        {GalleryData.map((img, idx) => (
           <div key={idx} className="overflow-hidden rounded-xl shadow-lg">
             <img
               src={img.src}

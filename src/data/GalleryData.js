@@ -1,4 +1,4 @@
-const galleryData = [
+const GalleryData = [
   {
     id: 1,
     src: "/images/gallery/ayurveda-treatment.jpg",
@@ -41,4 +41,4 @@ const galleryData = [
   },
 ];
 
-export default galleryData;
+export default GalleryData;
