@@ -190,24 +190,36 @@ export default function Home() {
 
       {/* Floating CTA */}
       <motion.a
-        href="/contact"
-        aria-label="Book a healing session"
-        className="fixed bottom-8 left-1/2 -translate-x-1/2 z-40 flex items-center gap-3 bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-6 py-4 rounded-full shadow-2xl backdrop-blur-md border border-white/20 hover:shadow-emerald-500/50 transition-all group"
-        initial={{ y: 100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 1.5 }}
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.95 }}
-      >
-        <Phone className="w-5 h-5 group-hover:animate-pulse" />
-        <span className="font-bold text-lg">Book Healing</span>
-        <motion.div animate={{ x: [0, 5, 0] }} transition={{ repeat: Infinity, duration: 1.5 }}>
-          <ArrowRight className="w-5 h-5" />
-        </motion.div>
-      </motion.a>
+  href="/contact"
+  aria-label="Book a healing session"
+  className="
+    fixed bottom-6 left-1/2 -translate-x-1/2 z-40
+    flex items-center gap-2 sm:gap-3
+    bg-gradient-to-r from-emerald-500 to-teal-600 text-white
+    px-4 py-2.5 sm:px-6 sm:py-4
+    rounded-full shadow-xl sm:shadow-2xl
+    backdrop-blur-md border border-white/20
+    hover:shadow-emerald-500/50 transition-all group
+  "
+  initial={{ y: 100, opacity: 0 }}
+  animate={{ y: 0, opacity: 1 }}
+  transition={{ delay: 1.5 }}
+  whileHover={{ scale: 1.08 }}
+  whileTap={{ scale: 0.95 }}
+>
+  <Phone className="w-4 h-4 sm:w-5 sm:h-5 group-hover:animate-pulse" />
+  <span className="font-semibold text-sm sm:text-lg">Book Healing</span>
+  <motion.div
+    animate={{ x: [0, 4, 0] }}
+    transition={{ repeat: Infinity, duration: 1.5 }}
+  >
+    <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
+  </motion.div>
+</motion.a>
+
 
       {/* WhatsApp */}
-   <motion.a
+ <motion.a
   href="https://wa.me/919876543210"
   target="_blank"
   rel="noopener noreferrer"
@@ -217,14 +229,23 @@ export default function Home() {
   animate={{ y: 0, opacity: 1 }}
   transition={{ delay: 0.8 }}
 >
-  {/* 👇 Pop-up text on mobile */}
+  {/* 👇 Animated 'Chat' label (mobile only) */}
   <motion.span
     className="text-xs font-medium text-white bg-green-600 px-2 py-1 rounded-md shadow-md sm:hidden"
     initial={{ opacity: 0, y: 10 }}
-    animate={{ opacity: [0, 1, 0], y: [10, 0, 10] }}
-    transition={{ duration: 3, delay: 1.2 }}
+    animate={{
+      opacity: 1,
+      y: [0, -4, 0], // gentle bounce
+    }}
+    transition={{
+      delay: 1,
+      duration: 1.5,
+      repeat: Infinity,
+      repeatType: "loop",
+      ease: "easeInOut",
+    }}
   >
-    Chat
+   Any Queries
   </motion.span>
 
   {/* Main WhatsApp Button */}
@@ -257,6 +278,7 @@ export default function Home() {
     </motion.div>
   </motion.div>
 </motion.a>
+
 
 
 

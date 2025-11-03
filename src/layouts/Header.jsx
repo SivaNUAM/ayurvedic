@@ -217,6 +217,192 @@
 // );
 
 
+// import { useState, useEffect } from "react";
+// import { motion, AnimatePresence } from "framer-motion";
+// import { Menu, X } from "lucide-react";
+
+// export default function Header() {
+//   const [open, setOpen] = useState(false);
+//   const [scrolled, setScrolled] = useState(false);
+
+//   /* ---------- Scroll effect ---------- */
+//   useEffect(() => {
+//     const onScroll = () => setScrolled(window.scrollY > 20);
+//     window.addEventListener("scroll", onScroll);
+//     return () => window.removeEventListener("scroll", onScroll);
+//   }, []);
+
+//   const navItems = [
+//     { name: "Home", href: "/" },
+//     { name: "About", href: "/about" },
+//     { name: "Treatments", href: "/treatments" },
+//     { name: "Doctors", href: "/doctors" },
+//     { name: "Contact", href: "/contact" },
+//   ];
+
+//   return (
+//     <>
+//       {/* Floating Orb */}
+//       <motion.div
+//         className="fixed top-0 left-0 w-96 h-96 -translate-x-1/2 -translate-y-1/2 bg-gradient-to-br from-emerald-400/20 via-teal-400/20 to-cyan-400/20 rounded-full blur-3xl pointer-events-none z-0"
+//         animate={{ scale: [1, 1.2, 1], rotate: [0, 360] }}
+//         transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+//       />
+
+//       {/* ---------- NAV ---------- */}
+//       <motion.nav
+//         initial={{ y: -100 }}
+//         animate={{ y: 0 }}
+//         transition={{ type: "spring", stiffness: 120 }}
+//         className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
+//           scrolled
+//             ? "bg-white/90 backdrop-blur-md shadow-md"
+//             : "bg-transparent"
+//         }`}
+//       >
+//         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+//           {/* ---- LOGO + DESKTOP LINKS (centered) ---- */}
+//           <div className="flex flex-col items-center py-4">
+//             {/* Logo + Brand */}
+//             <motion.a
+//               href="/"
+//               className="flex items-center gap-3 group"
+//               whileHover={{ scale: 1.05 }}
+//             >
+//               <motion.div
+//                 animate={{ rotateY: [0, 360] }}
+//                 transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+//                 className="w-10 h-10 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-xl flex items-center justify-center shadow-lg"
+//               >
+//                 <motion.div
+//                   animate={{ rotate: [0, -10, 10, 0] }}
+//                   transition={{ duration: 4, repeat: Infinity }}
+//                 >
+//                   <LeafIcon className="w-6 h-6 text-white" />
+//                 </motion.div>
+//               </motion.div>
+
+//               <span
+//                 className={`text-2xl font-bold transition-colors ${
+//                   scrolled ? "text-gray-900" : "text-white"
+//                 }`}
+//               >
+//                 Aura Ayurvedic
+//               </span>
+//             </motion.a>
+
+//             {/* Desktop Nav (second line) */}
+//             <div className="hidden lg:flex items-center gap-1 mt-3">
+//               {navItems.map((item, i) => (
+//                 <motion.a
+//                   key={i}
+//                   href={item.href}
+//                   className={`relative px-5 py-2 font-medium transition-all group ${
+//                     scrolled ? "text-gray-900" : "text-white"
+//                   }`}
+//                   initial={{ opacity: 0, y: -15 }}
+//                   animate={{ opacity: 1, y: 0 }}
+//                   transition={{ delay: i * 0.08 }}
+//                   whileHover={{ y: -2 }}
+//                 >
+//                   <span className="relative z-10">{item.name}</span>
+
+//                   {/* hover background */}
+//                   <motion.div
+//                     className="absolute inset-0 bg-gradient-to-r from-emerald-400/20 to-teal-400/20 rounded-xl -z-10"
+//                     initial={{ scale: 0 }}
+//                     whileHover={{ scale: 1 }}
+//                     transition={{ type: "spring", stiffness: 400 }}
+//                   />
+
+//                   {/* hover underline */}
+//                   <motion.div
+//                     className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-gradient-to-r from-emerald-500 to-teal-500"
+//                     whileHover={{ width: "60%", left: "20%" }}
+//                     transition={{ duration: 0.3 }}
+//                   />
+//                 </motion.a>
+//               ))}
+//             </div>
+//           </div>
+
+//           {/* ---------- Mobile Hamburger (always visible) ---------- */}
+//           <div className="absolute right-4 top-1/2 -translate-y-1/2 lg:hidden">
+//             <motion.button
+//               onClick={() => setOpen(!open)}
+//               className="p-3 rounded-xl bg-white/50 backdrop-blur-md shadow-md"
+//               whileHover={{ scale: 1.1 }}
+//               whileTap={{ scale: 0.9 }}
+//             >
+//               <motion.div
+//                 animate={{ rotate: open ? 180 : 0 }}
+//                 transition={{ duration: 0.3 }}
+//               >
+//                 {open ? (
+//                   <X className="w-6 h-6 text-emerald-600" />
+//                 ) : (
+//                   <Menu className="w-6 h-6 text-emerald-600" />
+//                 )}
+//               </motion.div>
+//             </motion.button>
+//           </div>
+//         </div>
+
+//         {/* ---------- Mobile Menu ---------- */}
+//         <AnimatePresence>
+//           {open && (
+//             <motion.div
+//               initial={{ height: 0, opacity: 0 }}
+//               animate={{ height: "auto", opacity: 1 }}
+//               exit={{ height: 0, opacity: 0 }}
+//               transition={{ duration: 0.4, ease: "easeOut" }}
+//               className="lg:hidden overflow-hidden bg-white/90 backdrop-blur-xl border-t border-gray-200"
+//             >
+//               <div className="px-6 py-6 space-y-4 text-center">
+//                 {navItems.map((item, i) => (
+//                   <motion.a
+//                     key={i}
+//                     href={item.href}
+//                     onClick={() => setOpen(false)}
+//                     className="block text-lg font-medium text-gray-700 hover:text-emerald-600 transition-all"
+//                     initial={{ x: -40, opacity: 0 }}
+//                     animate={{ x: 0, opacity: 1 }}
+//                     exit={{ x: -40, opacity: 0 }}
+//                     transition={{ delay: i * 0.05 }}
+//                     whileHover={{ x: 8 }}
+//                   >
+//                     {item.name}
+//                   </motion.a>
+//                 ))}
+//               </div>
+//             </motion.div>
+//           )}
+//         </AnimatePresence>
+//       </motion.nav>
+//     </>
+//   );
+// }
+
+// /* ---- Leaf SVG ---- */
+// const LeafIcon = ({ className }) => (
+//   <svg
+//     xmlns="http://www.w3.org/2000/svg"
+//     viewBox="0 0 24 24"
+//     fill="none"
+//     stroke="currentColor"
+//     strokeWidth="2"
+//     strokeLinecap="round"
+//     strokeLinejoin="round"
+//     className={className}
+//   >
+//     <path d="M21 12.5c0-5-3.5-8-9-8s-9 3-9 8c0 3 1.5 5.5 4 7" />
+//     <path d="M12 4v16" />
+//     <path d="M8 12h8" />
+//   </svg>
+// );
+
+'use client';
+
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
@@ -261,38 +447,62 @@ export default function Header() {
         }`}
       >
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* ---- LOGO + DESKTOP LINKS (centered) ---- */}
-          <div className="flex flex-col items-center py-4">
-            {/* Logo + Brand */}
-            <motion.a
-              href="/"
-              className="flex items-center gap-3 group"
-              whileHover={{ scale: 1.05 }}
-            >
-              <motion.div
-                animate={{ rotateY: [0, 360] }}
-                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                className="w-10 h-10 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-xl flex items-center justify-center shadow-lg"
+          {/* ---- LOGO + DESKTOP NAV ---- */}
+          <div className="flex flex-col py-4">
+            {/* Mobile: Logo Left + Hamburger Right | Desktop: Centered Logo */}
+            <div className="flex justify-between items-center lg:justify-center">
+              {/* Logo + Text (Left on Mobile, Center on Desktop) */}
+              <motion.a
+                href="/"
+                className="flex items-center gap-3 group"
+                whileHover={{ scale: 1.05 }}
               >
                 <motion.div
-                  animate={{ rotate: [0, -10, 10, 0] }}
-                  transition={{ duration: 4, repeat: Infinity }}
+                  animate={{ rotateY: [0, 360] }}
+                  transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                  className="w-10 h-10 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-xl flex items-center justify-center shadow-lg"
                 >
-                  <LeafIcon className="w-6 h-6 text-white" />
+                  <motion.div
+                    animate={{ rotate: [0, -10, 10, 0] }}
+                    transition={{ duration: 4, repeat: Infinity }}
+                  >
+                    <LeafIcon className="w-6 h-6 text-white" />
+                  </motion.div>
                 </motion.div>
-              </motion.div>
 
-              <span
-                className={`text-2xl font-bold transition-colors ${
-                  scrolled ? "text-gray-900" : "text-white"
-                }`}
-              >
-                Aura Ayurvedic
-              </span>
-            </motion.a>
+                <span
+                  className={`text-2xl font-bold transition-colors ${
+                    scrolled ? "text-gray-900" : "text-white"
+                  }`}
+                >
+                  Aura Ayurvedic
+                </span>
+              </motion.a>
 
-            {/* Desktop Nav (second line) */}
-            <div className="hidden lg:flex items-center gap-1 mt-3">
+              {/* Mobile Hamburger (Right) */}
+              <div className="lg:hidden">
+                <motion.button
+                  onClick={() => setOpen(!open)}
+                  className="p-3 rounded-xl bg-white/50 backdrop-blur-md shadow-md"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  <motion.div
+                    animate={{ rotate: open ? 180 : 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    {open ? (
+                      <X className="w-6 h-6 text-emerald-600" />
+                    ) : (
+                      <Menu className="w-6 h-6 text-emerald-600" />
+                    )}
+                  </motion.div>
+                </motion.button>
+              </div>
+            </div>
+
+            {/* Desktop Nav Links (Centered Below Logo) */}
+            <div className="hidden lg:flex justify-center items-center gap-1 mt-3">
               {navItems.map((item, i) => (
                 <motion.a
                   key={i}
@@ -307,7 +517,7 @@ export default function Header() {
                 >
                   <span className="relative z-10">{item.name}</span>
 
-                  {/* hover background */}
+                  {/* Hover Background */}
                   <motion.div
                     className="absolute inset-0 bg-gradient-to-r from-emerald-400/20 to-teal-400/20 rounded-xl -z-10"
                     initial={{ scale: 0 }}
@@ -315,7 +525,7 @@ export default function Header() {
                     transition={{ type: "spring", stiffness: 400 }}
                   />
 
-                  {/* hover underline */}
+                  {/* Hover Underline */}
                   <motion.div
                     className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-gradient-to-r from-emerald-500 to-teal-500"
                     whileHover={{ width: "60%", left: "20%" }}
@@ -325,30 +535,9 @@ export default function Header() {
               ))}
             </div>
           </div>
-
-          {/* ---------- Mobile Hamburger (always visible) ---------- */}
-          <div className="absolute right-4 top-1/2 -translate-y-1/2 lg:hidden">
-            <motion.button
-              onClick={() => setOpen(!open)}
-              className="p-3 rounded-xl bg-white/50 backdrop-blur-md shadow-md"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <motion.div
-                animate={{ rotate: open ? 180 : 0 }}
-                transition={{ duration: 0.3 }}
-              >
-                {open ? (
-                  <X className="w-6 h-6 text-emerald-600" />
-                ) : (
-                  <Menu className="w-6 h-6 text-emerald-600" />
-                )}
-              </motion.div>
-            </motion.button>
-          </div>
         </div>
 
-        {/* ---------- Mobile Menu ---------- */}
+        {/* ---------- Mobile Menu (Dropdown) ---------- */}
         <AnimatePresence>
           {open && (
             <motion.div
@@ -383,7 +572,7 @@ export default function Header() {
   );
 }
 
-/* ---- Leaf SVG ---- */
+/* ---- Leaf Icon SVG ---- */
 const LeafIcon = ({ className }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
