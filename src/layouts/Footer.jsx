@@ -104,8 +104,8 @@ export default function Footer() {
 
   const contactInfo = [
     { Icon: MapPin, text: "456 Harmony Lane, Rishikesh, India" },
-    { Icon: Phone, text: "+91 98765 43210" },
-    { Icon: Mail, text: "heal@anandaayurveda.com" },
+    { Icon: Phone, text: "+91 1234567890" },
+    { Icon: Mail, text: "demo@ayurveda.com" },
   ];
 
   return (
